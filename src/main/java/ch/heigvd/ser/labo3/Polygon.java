@@ -7,21 +7,37 @@
 
 package ch.heigvd.ser.labo3;
 
+import org.jdom2.Element;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Polygon {
+public class Polygon implements FormattableToKML {
+
     List<Coordinate> points;
 
+    /**
+     * Constructor of Polygon.
+     */
     public Polygon() {
         this.points = new ArrayList<>();
     }
 
+    /**
+     * Add a point to the list of points forming the polygon.
+     * @param coordinate Coordinate to add.
+     */
     public void addCoordinate(Coordinate coordinate) {
         points.add(coordinate);
     }
 
+    /**
+     * Get the Coordinate at given index.
+     * @param index Index of the coordinate.
+     * @return Instance of coordinate or null if index is out of range.
+     * @apiNote This methods is mainly used in test class.
+     */
     public Coordinate getCoordinate(int index) {
         if (index < 0) {
             return null;
@@ -40,5 +56,13 @@ public class Polygon {
     @Override
     public int hashCode() {
         return Objects.hash(points);
+    }
+
+    @Override
+    public Element toKML() {
+
+        // TODO
+
+        return null; // TODO: change 'return null'
     }
 }

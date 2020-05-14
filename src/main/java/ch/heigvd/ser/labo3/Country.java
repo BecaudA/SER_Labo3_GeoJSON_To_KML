@@ -8,10 +8,13 @@
 
 package ch.heigvd.ser.labo3;
 
+import org.jdom2.Element;
+
 import java.util.List;
 import java.util.Objects;
 
-public class Country {
+public class Country implements FormattableToKML {
+
     private final String ADMIN;
     private final String ISO_A3;
     private final List<Polygon> borders;
@@ -65,5 +68,13 @@ public class Country {
     @Override
     public int hashCode() {
         return Objects.hash(ADMIN, ISO_A3, borders);
+    }
+
+    @Override
+    public Element toKML() {
+
+        // TODO
+
+        return null; // TODO: change 'return null'
     }
 }

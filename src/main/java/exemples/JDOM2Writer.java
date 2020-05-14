@@ -5,6 +5,10 @@ import java.io.*;
 import org.jdom2.*;
 import org.jdom2.output.*;
 
+// ----------------------
+// TODO: remove this file
+// ----------------------
+
 public class JDOM2Writer {
 
     private static final String xmlFilePath = "src/newXMLfile.xml";

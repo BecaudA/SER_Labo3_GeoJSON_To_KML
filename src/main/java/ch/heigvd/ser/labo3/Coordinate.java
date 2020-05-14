@@ -7,13 +7,14 @@
 
 package ch.heigvd.ser.labo3;
 
+import org.jdom2.Element;
+
 import java.util.Objects;
 
-public class Coordinate {
+public class Coordinate implements FormattableToKML {
+
     private final Double X;
     private final Double Y;
-
-
 
     /**
      * Constructor of ch.heigvd.ser.labo3.Coordinate.
@@ -53,5 +54,13 @@ public class Coordinate {
     @Override
     public int hashCode() {
         return Objects.hash(X, Y);
+    }
+
+    @Override
+    public Element toKML() {
+
+        // TODO
+
+        return null; // TODO: change 'return null'
     }
 }

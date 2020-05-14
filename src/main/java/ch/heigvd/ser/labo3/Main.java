@@ -9,6 +9,6 @@ package ch.heigvd.ser.labo3;
 
 public class Main {
     public static void main(String[] args) {
-        // TODO
+        // TODO: Use GeoJSONReader and KMLWriter to parse geojson file and create kml file
     }
 }
