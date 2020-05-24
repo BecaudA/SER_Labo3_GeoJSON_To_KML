@@ -11,7 +11,7 @@ import org.jdom2.Element;
 
 import java.util.Objects;
 
-public class Coordinate implements FormattableToKML {
+public class Coordinate{
 
     private final Double X;
     private final Double Y;
@@ -54,13 +54,5 @@ public class Coordinate implements FormattableToKML {
     @Override
     public int hashCode() {
         return Objects.hash(X, Y);
-    }
-
-    @Override
-    public Element toKML() {
-
-        // TODO
-
-        return null; // TODO: change 'return null'
     }
 }

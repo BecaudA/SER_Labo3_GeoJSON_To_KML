@@ -6,9 +6,13 @@
  */
 
 package ch.heigvd.ser.labo3;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // TODO: Use GeoJSONReader and KMLWriter to parse geojson file and create kml file
+
+        GeoJSONReader geoJSONreader = new GeoJSONReader("./src/main/java/ch/heigvd/ser/labo3/countries.geojson");
+        KMLWriter kml = new KMLWriter("src/export.kml",geoJSONreader.parse());
+
     }
 }
