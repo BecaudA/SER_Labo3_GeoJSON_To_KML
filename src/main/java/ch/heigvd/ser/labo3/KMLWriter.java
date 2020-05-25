@@ -9,39 +9,44 @@ import java.io.FileWriter;
 
 public class KMLWriter {
 
-    private Element document =  new Element("Document");
+    private final String pathToFile;
+    private final List<? extends FormattableToKML> list;
 
     /**
      * Constructor of KMLWriter.
-     * @param pathToFile path to destination file.
+     * @param pathToFile Path to destination file.
+     * @param list List of object to add to kml file.
      */
-    public KMLWriter(String pathToFile, List<Country> list) {
-        try {
+    public KMLWriter(String pathToFile, List<? extends FormattableToKML> list) {
+        this.pathToFile = pathToFile;
+        this.list       = list;
+    }
 
-            Element kml = new Element("kml");
+    public void write() {
+        Element kml;
+        Element document;
+        XMLOutputter xmlOutputer;
+
+        try {
+            // Create kml main element and set his attribute
+            kml = new Element("kml");
             kml.setAttribute("xmlns2","http://www.opengis.net/kml/2.2");
-            addContent(list);
+
+            // Add the list of object extending FormattableToKML to the document content
+            document = new Element("Document");
+            for (FormattableToKML obj : list) {
+                document.addContent(obj.toKML());
+            }
 
             kml.addContent(document);
 
             // Writing in the destination file
-            Document documentType = new Document(kml);
-            XMLOutputter xmlOutputer = new XMLOutputter();
+            xmlOutputer = new XMLOutputter();
             xmlOutputer.setFormat(Format.getPrettyFormat());
-            xmlOutputer.output(documentType, new FileWriter(pathToFile));
+            xmlOutputer.output(new Document(kml), new FileWriter(pathToFile));
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Add content from a list of FormattableToKML.
-     * @param list list of FormattableToKML.
-     */
-    public void addContent(List<? extends FormattableToKML> list) {
-        for (FormattableToKML obj: list) {
-            document.addContent(obj.toKML());
         }
     }
 }
