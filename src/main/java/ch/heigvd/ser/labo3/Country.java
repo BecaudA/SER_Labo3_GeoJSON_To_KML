@@ -73,59 +73,41 @@ public class Country implements FormattableToKML {
     @Override
     public Element toKML() {
 
+        // Placemark Element
         Element placemark = new Element("Placemark");
 
-        // Creation of the element "name" with the name of country
-        Element country = new Element("name");
-        country.addContent(ADMIN);
+        // Name Element
+        Element countryName = new Element("name").addContent(ADMIN);
 
-        //Style ---> Je ne vois pas comment ne pas le mettre là, mais je pense que on ne doit pas faire le KML du style ici
-        Element style = new Element("Style");
-        Element lineStyle = new Element("LineStyle");
-        Element polyStyle = new Element("PolyStyle");
-        Element color = new Element("Color");
-        color.addContent("ffffffff");
-        lineStyle.addContent(color);
-        Element fill = new Element("fill");
-        fill.addContent("0");
-        polyStyle.addContent(fill);
-        style.addContent(lineStyle);
-        style.addContent(polyStyle);
+        // styleUri Element
+        Element style = new Element("styleUrl").addContent("#polygonStyle");
 
-
-        // Creation of sub-Elements
+        // Extended Data Element
         Element extendedData = new Element("ExtendedData");
-        Element schemaData = new Element("SchemaData");
+        Element schemaData   = new Element("SchemaData");
 
-        Element simpleData_ADMIN = new Element("SimpleData");
-        simpleData_ADMIN.setAttribute("name","ADMIN");
-        simpleData_ADMIN.addContent(ADMIN);
-        schemaData.addContent(simpleData_ADMIN);
-
-        Element simpleData_ISO_A3 = new Element("SimpleData");
-        simpleData_ISO_A3.setAttribute("name","ISO_A3");
-        simpleData_ISO_A3.addContent(ISO_A3);
-        schemaData.addContent( simpleData_ISO_A3);
+        schemaData.addContent(new Element("SimpleData").setAttribute("name","ADMIN").addContent(ADMIN));
+        schemaData.addContent(new Element("SimpleData").setAttribute("name","ISO_A3").addContent(ISO_A3));
 
         extendedData.addContent(schemaData);
 
-
-        placemark.addContent(country);
+        // Add Name, styleUri & Extended Data Elements to Placemark Element
+        placemark.addContent(countryName);
         placemark.addContent(style);
         placemark.addContent(extendedData);
 
-
-        if(borders.size() > 1){
+        // Polygon / MultiGeometry
+        if (borders.size() > 1) {
+            // Add a MultiGeometry Element if multiple border exist
             Element multiGeom = new Element("MultiGeometry");
-            for (Polygon pol: borders) {
+            for (Polygon pol : borders) {
                 multiGeom.addContent(pol.toKML());
             }
             placemark.addContent(multiGeom);
-        }
-        else{
+        } else {
+            // Add a Polygon if only one border exists
             placemark.addContent(borders.get(0).toKML());
         }
-
 
         return placemark;
     }

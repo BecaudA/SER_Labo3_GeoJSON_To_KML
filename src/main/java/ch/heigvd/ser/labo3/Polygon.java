@@ -61,19 +61,20 @@ public class Polygon implements FormattableToKML {
     @Override
     public Element toKML() {
 
-        Element polygone = new Element("Polygon");
+        Element polygon         = new Element("Polygon");
         Element outerBoundaryIs = new Element("outerBoundaryIs");
-        Element linearRing = new Element("LinearRing");
-        Element coord = new Element("coordinates");
+        Element linearRing      = new Element("LinearRing");
+        Element coord           = new Element("coordinates");
 
-        for (Coordinate cor: points) {
+        for (Coordinate cor : points) {
             coord.addContent(cor.getX() + "," + cor.getY() + " ");
         }
 
         linearRing.addContent(coord);
         outerBoundaryIs.addContent(linearRing);
-        polygone.addContent(outerBoundaryIs);
-        return polygone;
+        polygon.addContent(outerBoundaryIs);
+
+        return polygon;
 
     }
 }

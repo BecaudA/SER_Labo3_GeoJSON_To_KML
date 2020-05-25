@@ -19,6 +19,24 @@ public class KMLWriter {
     private final List<? extends FormattableToKML> list;
 
     /**
+     * Generate a Style Element for Polygon with a specific id set to "polygonStyle".
+     * @return Style Element.
+     */
+    private Element getPolygonStyleElement() {
+        Element style     = new Element("Style").setAttribute("id", "polygonStyle");
+        Element polyStyle = new Element("PolyStyle");
+
+        polyStyle.addContent(new Element("color").addContent("ffffffff"));
+        polyStyle.addContent(new Element("colorMode").addContent("normal"));
+        polyStyle.addContent(new Element("fill").addContent("0"));
+        polyStyle.addContent(new Element("outline").addContent("1"));
+
+        style.addContent(polyStyle);
+
+        return style;
+    }
+
+    /**
      * Constructor of KMLWriter.
      * @param pathToFile Path to destination file.
      * @param list List of object to add to kml file.
@@ -38,8 +56,13 @@ public class KMLWriter {
             kml = new Element("kml");
             kml.setAttribute("xmlns2","http://www.opengis.net/kml/2.2");
 
-            // Add the list of object extending FormattableToKML to the document content
+            // Document Element
             document = new Element("Document");
+
+            // Set Polygon Style in Document Element
+            document.addContent(getPolygonStyleElement());
+
+            // Add the list of object extending FormattableToKML to the document content
             for (FormattableToKML obj : list) {
                 document.addContent(obj.toKML());
             }

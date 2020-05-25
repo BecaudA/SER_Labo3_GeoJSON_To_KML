@@ -7,8 +7,6 @@
 
 package ch.heigvd.ser.labo3;
 
-import org.jdom2.Element;
-
 import java.util.Objects;
 
 public class Coordinate{
