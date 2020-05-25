@@ -2,7 +2,7 @@
  * File        : ch.heigvd.ser.labo3.Coordinate.java
  * Authors     : Arthur Bécaud & Nenad Rajic
  * Created on  : 14.05.2020
- * Description : This class represents a ch.heigvd.ser.labo3.Coordinate in x and y axis.
+ * Description : This class represents a Coordinate in x and y axis.
  */
 
 package ch.heigvd.ser.labo3;

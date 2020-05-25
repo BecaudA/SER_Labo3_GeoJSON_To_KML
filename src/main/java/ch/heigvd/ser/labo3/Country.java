@@ -3,7 +3,7 @@
  * Authors     : Arthur Bécaud & Nenad Rajic
  * Created on  : 14.05.2020
  * Description : This class represents a country with his ADMIN and ISO_A3 names.
- *               A country possesses a list of ch.heigvd.ser.labo3.Polygon to represent his borders.
+ *               A country possesses a list of Polygon to represent his borders.
  */
 
 package ch.heigvd.ser.labo3;

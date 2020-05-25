@@ -136,7 +136,7 @@ public class GeoJSONReader {
                 }
                 else{
                     // Pour les multigeometry (plusieurs polygones) JSONArray dans JSONArray ---> à modifier
-                    for(Object multiCoord: (JSONArray) jsonCoordinate){
+                    for (Object multiCoord: (JSONArray) jsonCoordinate) {
                         JSONArray jsonCoordinate2 = (JSONArray) multiCoord;
                         String coordX = jsonCoordinate2.get(0).toString();
                         String coordY = jsonCoordinate2.get(1).toString();
