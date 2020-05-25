@@ -124,11 +124,27 @@ public class GeoJSONReader {
             // Create new empty ch.heigvd.ser.labo3.Polygon
             polygon = new Polygon();
 
+
+            ////// A MODIFIER
             // Loop through all coordinates within current list to add new coordinate inside the polygon
             for (Object coordinate : (JSONArray) coordinatesList) {
                 jsonCoordinate = (JSONArray) coordinate;
-                polygon.addCoordinate(new Coordinate((Double) jsonCoordinate.get(0),
-                                                     (Double) jsonCoordinate.get(1)));
+                if(jsonCoordinate.size() == 2) {
+                    String coordX = jsonCoordinate.get(0).toString();
+                    String coordY = jsonCoordinate.get(1).toString();
+                    polygon.addCoordinate(new Coordinate(new Double(coordX), new Double(coordY)));
+                }
+                else{
+                    // Pour les multigeometry (plusieurs polygones) JSONArray dans JSONArray ---> à modifier
+                    for(Object multiCoord: (JSONArray) jsonCoordinate){
+                        JSONArray jsonCoordinate2 = (JSONArray) multiCoord;
+                        String coordX = jsonCoordinate2.get(0).toString();
+                        String coordY = jsonCoordinate2.get(1).toString();
+                        polygon.addCoordinate(new Coordinate(new Double(coordX), new Double(coordY)));
+                    }
+
+
+                }
             }
 
             // Add the polygon to current polygons list
