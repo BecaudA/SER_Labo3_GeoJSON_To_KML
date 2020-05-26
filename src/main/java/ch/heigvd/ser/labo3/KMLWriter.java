@@ -70,9 +70,12 @@ public class KMLWriter {
             kml.addContent(document);
 
             // Writing in the destination file
+            FileWriter fw = new FileWriter(pathToFile);
             xmlOutputer = new XMLOutputter();
             xmlOutputer.setFormat(Format.getPrettyFormat());
-            xmlOutputer.output(new Document(kml), new FileWriter(pathToFile));
+            xmlOutputer.output(new Document(kml), fw);
+
+            fw.close();
 
         } catch (Exception e) {
             e.printStackTrace();
