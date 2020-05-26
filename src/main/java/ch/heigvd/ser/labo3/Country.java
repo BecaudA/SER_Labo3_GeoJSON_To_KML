@@ -3,15 +3,18 @@
  * Authors     : Arthur Bécaud & Nenad Rajic
  * Created on  : 14.05.2020
  * Description : This class represents a country with his ADMIN and ISO_A3 names.
- *               A country possesses a list of ch.heigvd.ser.labo3.Polygon to represent his borders.
+ *               A country possesses a list of Polygon to represent his borders.
  */
 
 package ch.heigvd.ser.labo3;
 
+import org.jdom2.Element;
+
 import java.util.List;
 import java.util.Objects;
 
-public class Country {
+public class Country implements FormattableToKML {
+
     private final String ADMIN;
     private final String ISO_A3;
     private final List<Polygon> borders;
@@ -65,5 +68,47 @@ public class Country {
     @Override
     public int hashCode() {
         return Objects.hash(ADMIN, ISO_A3, borders);
+    }
+
+    @Override
+    public Element toKML() {
+
+        // Placemark Element
+        Element placemark = new Element("Placemark");
+
+        // Name Element
+        Element countryName = new Element("name").addContent(ADMIN);
+
+        // styleUri Element
+        Element style = new Element("styleUrl").addContent("#polygonStyle");
+
+        // Extended Data Element
+        Element extendedData = new Element("ExtendedData");
+        Element schemaData   = new Element("SchemaData");
+
+        schemaData.addContent(new Element("SimpleData").setAttribute("name","ADMIN").addContent(ADMIN));
+        schemaData.addContent(new Element("SimpleData").setAttribute("name","ISO_A3").addContent(ISO_A3));
+
+        extendedData.addContent(schemaData);
+
+        // Add Name, styleUri & Extended Data Elements to Placemark Element
+        placemark.addContent(countryName);
+        placemark.addContent(style);
+        placemark.addContent(extendedData);
+
+        // Polygon / MultiGeometry
+        if (borders.size() > 1) {
+            // Add a MultiGeometry Element if multiple border exist
+            Element multiGeom = new Element("MultiGeometry");
+            for (Polygon pol : borders) {
+                multiGeom.addContent(pol.toKML());
+            }
+            placemark.addContent(multiGeom);
+        } else {
+            // Add a Polygon if only one border exists
+            placemark.addContent(borders.get(0).toKML());
+        }
+
+        return placemark;
     }
 }
