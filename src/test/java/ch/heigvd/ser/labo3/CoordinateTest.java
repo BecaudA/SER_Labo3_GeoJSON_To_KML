@@ -2,7 +2,7 @@
  * File        : ch.heigvd.ser.labo3.CoordinateTest.java
  * Authors     : Arthur Bécaud & Nenad Rajic
  * Created on  : 14.05.2020
- * Description : Test class of ch.heigvd.ser.labo3.Coordinate class.
+ * Description : Test class of Coordinate class.
  */
 
 package ch.heigvd.ser.labo3;
@@ -10,14 +10,11 @@ package ch.heigvd.ser.labo3;
 import org.junit.Assert;
 import org.junit.Test;
 
-
-import static org.junit.Assert.assertEquals;
-
 public class CoordinateTest {
     @Test
     public void shouldCreateCoordinateWithCorrectAxisValues() {
-        Coordinate c = new Coordinate(1d, 4d);
-        Assert.assertEquals((Double) 1d, c.getX());
-        Assert.assertEquals((Double)  4d, c.getY());
+        Coordinate c = new Coordinate("1", "4");
+        Assert.assertEquals("1", c.getX());
+        Assert.assertEquals("4", c.getY());
     }
 }

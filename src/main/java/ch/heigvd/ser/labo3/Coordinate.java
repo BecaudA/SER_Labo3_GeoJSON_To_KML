@@ -2,7 +2,7 @@
  * File        : ch.heigvd.ser.labo3.Coordinate.java
  * Authors     : Arthur Bécaud & Nenad Rajic
  * Created on  : 14.05.2020
- * Description : This class represents a Coordinate in x and y axis.
+ * Description : This class represents a Coordinate in x and y axis stocked in String.
  */
 
 package ch.heigvd.ser.labo3;
@@ -11,15 +11,15 @@ import java.util.Objects;
 
 public class Coordinate{
 
-    private final Double X;
-    private final Double Y;
+    private final String X;
+    private final String Y;
 
     /**
      * Constructor of ch.heigvd.ser.labo3.Coordinate.
      * @param x Point in x-axis.
      * @param y Point in y-axis.
      */
-    public Coordinate(Double x, Double y) {
+    public Coordinate(String x, String y) {
         this.X = x;
         this.Y = y;
     }
@@ -28,7 +28,7 @@ public class Coordinate{
      * Getter of X coordinate.
      * @return X attribute (instance of Double).
      */
-    public Double getX() {
+    public String getX() {
         return X;
     }
 
@@ -36,7 +36,7 @@ public class Coordinate{
      * Getter of Y coordinate.
      * @return Y attribute (instance of Double).
      */
-    public Double getY() {
+    public String getY() {
         return Y;
     }
 

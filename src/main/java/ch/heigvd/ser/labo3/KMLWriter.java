@@ -1,7 +1,7 @@
 /*
  * File        : ch.heigvd.ser.labo3.KMLWriter.java
  * Authors     : Arthur Bécaud & Nenad Rajic
- * Created on  : 14.05.2020
+ * Created on  : 20.05.2020
  * Description : This class provide a writing method of <? extends FormattableToKML> object in a kml format.
  */
 package ch.heigvd.ser.labo3;

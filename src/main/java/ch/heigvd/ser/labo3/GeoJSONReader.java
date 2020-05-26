@@ -21,12 +21,14 @@ import java.util.List;
 
 public class GeoJSONReader {
 
-    private static final String FEATURES    = "features";
-    private static final String PROPERTIES  = "properties";
-    private static final String ADMIN       = "ADMIN";
-    private static final String ISO_A3      = "ISO_A3";
-    private static final String GEOMETRY    = "geometry";
-    private static final String COORDINATES = "coordinates";
+    private static final String FEATURES      = "features";
+    private static final String PROPERTIES    = "properties";
+    private static final String ADMIN         = "ADMIN";
+    private static final String ISO_A3        = "ISO_A3";
+    private static final String GEOMETRY      = "geometry";
+    private static final String COORDINATES   = "coordinates";
+    private static final String TYPE          = "type";
+    private static final String MULTI_POLYGON = "MultiPolygon";
 
     private FileReader reader;
 
@@ -112,39 +114,31 @@ public class GeoJSONReader {
     private List<Polygon> getListPolygon(JSONObject obj) throws ClassCastException, NullPointerException, IndexOutOfBoundsException {
 
         List<Polygon> polygons = new ArrayList<>();
-        Polygon polygon;
-        JSONArray jsonCoordinate;
+        Polygon       polygon;
+        JSONArray     jsonCoordinate;
+        String        geometryType;
 
         // Get the coordinates from JSON object
         JSONArray coordinatesLists = (JSONArray) ((JSONObject) obj.get(GEOMETRY)).get(COORDINATES);
 
+        // Get Geometry Type
+        geometryType = ((JSONObject) obj.get(GEOMETRY)).get(TYPE).toString();
+
         // Loop through all coordinates lists to create lists of polygons
         for (Object coordinatesList : coordinatesLists) {
 
-            // Create new empty ch.heigvd.ser.labo3.Polygon
+            // Create new empty Polygon
             polygon = new Polygon();
 
+            // Adapt jsonCoordinate if we are working with a MULTI_POLYGON due to GeoJSON format
+            if (geometryType.equals(MULTI_POLYGON)) {
+                coordinatesList = ((JSONArray) coordinatesList).get(0);
+            }
 
-            ////// A MODIFIER
             // Loop through all coordinates within current list to add new coordinate inside the polygon
             for (Object coordinate : (JSONArray) coordinatesList) {
                 jsonCoordinate = (JSONArray) coordinate;
-                if(jsonCoordinate.size() == 2) {
-                    String coordX = jsonCoordinate.get(0).toString();
-                    String coordY = jsonCoordinate.get(1).toString();
-                    polygon.addCoordinate(new Coordinate(new Double(coordX), new Double(coordY)));
-                }
-                else{
-                    // Pour les multigeometry (plusieurs polygones) JSONArray dans JSONArray ---> à modifier
-                    for (Object multiCoord: (JSONArray) jsonCoordinate) {
-                        JSONArray jsonCoordinate2 = (JSONArray) multiCoord;
-                        String coordX = jsonCoordinate2.get(0).toString();
-                        String coordY = jsonCoordinate2.get(1).toString();
-                        polygon.addCoordinate(new Coordinate(new Double(coordX), new Double(coordY)));
-                    }
-
-
-                }
+                polygon.addCoordinate(new Coordinate(jsonCoordinate.get(0).toString(), jsonCoordinate.get(1).toString()));
             }
 
             // Add the polygon to current polygons list
