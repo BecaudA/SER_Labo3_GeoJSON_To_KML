@@ -30,15 +30,15 @@ public class GeoJSONReaderTest {
             "]\n" +
             "}\n";
 
-    private File tempGeoJSONFile;
+    private File tmpExpectedGeoJSONResultFile;
 
     @Before
     public void generateTempGeoJSONFile() {
         // Try to create and write and example of GeoJSON into a temporary file
         try {
-            tempGeoJSONFile = File.createTempFile("tmpCountries", ".geojson");
-            tempGeoJSONFile.deleteOnExit();
-            FileWriter fw = new FileWriter(tempGeoJSONFile.getAbsolutePath());
+            tmpExpectedGeoJSONResultFile = File.createTempFile("tmpCountries", ".geojson");
+            tmpExpectedGeoJSONResultFile.deleteOnExit();
+            FileWriter fw = new FileWriter(tmpExpectedGeoJSONResultFile.getAbsolutePath());
             fw.write(CONTENT);
             fw.flush();
             fw.close();
@@ -84,7 +84,7 @@ public class GeoJSONReaderTest {
         expected.add(new Country("Country2", "CT2",  lst2));
 
         // Parse temp file
-        GeoJSONReader gjr = new GeoJSONReader(tempGeoJSONFile.getAbsolutePath());
+        GeoJSONReader gjr = new GeoJSONReader(tmpExpectedGeoJSONResultFile.getAbsolutePath());
         List<Country> result = gjr.parse();
 
         // Compare results
@@ -93,8 +93,8 @@ public class GeoJSONReaderTest {
 
     @After
     public void deleteTempGeoJSONFile() throws IOException {
-        if (tempGeoJSONFile.exists() && !tempGeoJSONFile.delete()) {
-            throw new IOException("Temp file (" + tempGeoJSONFile.getAbsolutePath() + ") could not be deleted");
+        if (tmpExpectedGeoJSONResultFile.exists() && !tmpExpectedGeoJSONResultFile.delete()) {
+            throw new IOException("Temp file (" + tmpExpectedGeoJSONResultFile.getAbsolutePath() + ") could not be deleted");
         }
     }
 }
