@@ -26,14 +26,14 @@ Le _parser_ utilise la librairie `com.googlecode.json-simple` pour lire toutes l
 
 Pour chaque _feature_ le _parser_ fait les tâches suivantes :
 1. Récupère les propriétés `ADMIN` et `ISO_A3` et les coordonnées de l'objet _goemetry_.
-2. Avec les coordonées récupérées, créé un ou plusieurs polygone (instance de la classe `Polygon`) dans une liste nommée `borders` selon le type de l'objet _geometry_ (type: _Polygon_ ou _MultiPolygon_).
+2. Avec les coordonées récupérées, créé un ou plusieurs polygones (instance de la classe `Polygon`) dans une liste nommée `borders` selon le type de l'objet _geometry_ (type: _Polygon_ ou _MultiPolygon_).
 3. Créé un pays (instance de la classe `Country`) avec les propriétés `ADMIN` et `ISO_A3` ainsi que la liste des bordures nommée `borders`.
 
 Une fois toutes les _features_ _parser_, retourne la liste des pays.
 
 **Utilisation :**
 1. Créer une instance de la classe avec comme paramètre le chemin vers un fichier au format `GeoJSON`.
-2. Utiliser la méthode `parse`  pour _parser_ ce fichier afin de générer et retourner une liste de pays ( `List<Country>` ) correspondant au contenu du fichier.
+2. Utiliser la méthode `parse` pour _parser_ ce fichier afin de générer et retourner une liste de pays ( `List<Country>` ) correspondant au contenu du fichier.
 
 #### KMLWriter
 La classe `KMLWriter` permet de générer un fichier _KML_ à partir d'une liste de pays ( `List<Country>` ).
@@ -48,19 +48,19 @@ S'ajoute ensuite une balise de style pour les polygons _kml_ comme enfant de la 
 
 Puis pour chaque pays le _writer_ utilise l'interface `FormattableToKML` pour obtenir une instance de `org.jdom2.Element` qui contiendra une balise `Placemark` avec toutes les informations dudit pays dans un format _kml_ adéquat. Ce résultat est ensuite ajouté comme nouvel enfant de la balise `Document`.
 
-Une fois que tous les pays sont ajoutés à la balise `Document`, le  _writer_ créé le nouveau fichier et utilise `org.jdom2.output.XMLOutputter` pour écrire le contenu du fichier avec la balise racine _kml_.
+Une fois que tous les pays sont ajoutés à la balise `Document`, le _writer_ créé le nouveau fichier et utilise `org.jdom2.output.XMLOutputter` pour écrire le contenu du fichier avec la balise racine _kml_.
 
 **Utilisation :**
 
 1. Créer une instance de la classe avec comme paramètre le chemin de destination du fichier au format `KML` et une liste de pays ( `List<Country>` ).
-2. Utiliser la méthode `write`  pour écrire le fichier _KML_ correspondant à la liste de pays donnée.
+2. Utiliser la méthode `write` pour écrire le fichier _KML_ correspondant à la liste de pays donnée.
 
 ## Difficultés rencontrées
-Nous avons rencontrées aucune difficulté particulière durant ce travail. Certaines parties du projet furent complexes comme l'analyse de la structure _GeoJSON_ ou la recherche du format _KML_ mais rien de transcendant finalement.
+Nous avons rencontré aucune difficulté particulière durant ce travail. Certaines parties du projet furent complexes comme l'analyse de la structure _GeoJSON_ ou la recherche du format _KML_ mais rien de transcendant finalement.
 ## Problème connu
-Il existe un problème connu avec la librairie `com.googlecode.json-simple` qui cause une perte de préscision des coordonnées. La librairie va automatiquement convertir les valeurs trouvées dans le fichier _geojson_ au format le plus approprié. Les coordonées sont ainsi convertis en _Double_ causant cette perte de préscision dans certains cas. Ceci est dû à la façon dont la librairie parse les données.
+Il existe un problème connu avec la librairie `com.googlecode.json-simple` qui cause une perte de précision des coordonnées. La librairie va automatiquement convertir les valeurs trouvées dans le fichier _geojson_ au format le plus approprié. Les coordonées sont ainsi convertis en _Double_ causant cette perte de préscision dans certains cas. Ceci est dû à la façon dont la librairie parse les données.
 
-Ce problème n'a finalement pas un grand impact sur le résultat car la perte de préscision arrive à partir de la 15ème décimale.
+Ce problème n'a finalement pas un grand impact sur le résultat car la perte de précision arrive à partir de la 15ème décimale.
 
 ## Résultat du _parsing_ du fichier GeoJSON
 **-- TODO --**
