@@ -45,6 +45,14 @@ public class Polygon implements FormattableToKML {
         return points.get(index);
     }
 
+    /**
+     * Return how many coordinates are used for the polygon.
+     * @return the amount of coordinates.
+     */
+    public int amountOfCoordinates() {
+        return points.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
