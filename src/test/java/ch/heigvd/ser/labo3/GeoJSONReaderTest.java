@@ -62,19 +62,19 @@ public class GeoJSONReaderTest {
         List<Polygon> lst2 = new ArrayList<>();
 
         // p1 : [ -69.996937628999916, 12.577582098000036 ], [ -69.936390753999945, 12.531724351000051 ], [ -69.924672003999945, 12.519232489000046 ]
-        p1.addCoordinate(new Coordinate("-69.996937628999916", "12.577582098000036"));
-        p1.addCoordinate(new Coordinate("-69.936390753999945", "12.531724351000051"));
-        p1.addCoordinate(new Coordinate("-69.924672003999945", "12.519232489000046"));
+        p1.addCoordinate(new Coordinate("-69.99693762899992", "12.577582098000036"));
+        p1.addCoordinate(new Coordinate("-69.93639075399994", "12.53172435100005"));
+        p1.addCoordinate(new Coordinate("-69.92467200399994", "12.519232489000046"));
 
         // p2 : [ 71.049802287000091, 38.408664450000089 ], [ 71.057140340000046, 38.409026184000084 ], [ 71.064943482000103, 38.411816712000046 ]
-        p2.addCoordinate(new Coordinate("71.049802287000091", "38.408664450000089"));
-        p2.addCoordinate(new Coordinate("71.057140340000046", "38.409026184000084"));
-        p2.addCoordinate(new Coordinate("71.064943482000103", "38.411816712000046"));
+        p2.addCoordinate(new Coordinate("71.04980228700009", "38.40866445000009"));
+        p2.addCoordinate(new Coordinate("71.05714034000005", "38.40902618400008"));
+        p2.addCoordinate(new Coordinate("71.0649434820001", "38.411816712000046"));
 
         // p3 : [ 71.076984091000043, 38.412178447000144 ], [ 71.049802287000091, 38.408664450000089 ], [ 71.049802287000094, 38.408664450000083 ]
-        p3.addCoordinate(new Coordinate("71.076984091000043", "38.412178447000144"));
-        p3.addCoordinate(new Coordinate("71.049802287000091", "38.408664450000089"));
-        p3.addCoordinate(new Coordinate("71.049802287000094", "38.408664450000083"));
+        p3.addCoordinate(new Coordinate("71.07698409100004", "38.412178447000144"));
+        p3.addCoordinate(new Coordinate("71.04980228700009", "38.40866445000009"));
+        p3.addCoordinate(new Coordinate("71.04980228700009", "38.40866445000008"));
 
         lst1.add(p1);
         lst2.add(p2);
@@ -88,7 +88,7 @@ public class GeoJSONReaderTest {
         List<Country> result = gjr.parse();
 
         // Compare results
-        assertEquals(expected.size(), result.size());
+        assertEquals(expected, result);
     }
 
     @After
