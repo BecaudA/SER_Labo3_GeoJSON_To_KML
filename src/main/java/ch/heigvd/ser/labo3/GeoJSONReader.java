@@ -68,7 +68,7 @@ public class GeoJSONReader {
                 jsonFeature = (JSONObject) feature;
                 countries.add(new Country(getADMIN(jsonFeature),
                                           getISO_A3(jsonFeature),
-                                          getListPolygon(jsonFeature)));
+                                          getBorders(jsonFeature)));
             }
 
             // Close reader
@@ -111,7 +111,7 @@ public class GeoJSONReader {
      * @throws NullPointerException if GEOMETRY or COORDINATES field are not found from 'feature' JSONObject.
      * @throws IndexOutOfBoundsException if parser try to access an improperly set coordinate pair from 'feature' JSONObject.
      */
-    private List<Polygon> getListPolygon(JSONObject obj) throws ClassCastException, NullPointerException, IndexOutOfBoundsException {
+    private List<Polygon> getBorders(JSONObject obj) throws ClassCastException, NullPointerException, IndexOutOfBoundsException {
 
         List<Polygon> polygons = new ArrayList<>();
         Polygon       polygon;
