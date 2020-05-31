@@ -63,7 +63,11 @@ Il existe un problème connu avec la librairie `com.googlecode.json-simple` qui 
 Ce problème n'a finalement pas un grand impact sur le résultat car la perte de précision arrive à partir de la 15ème décimale.
 
 ## Résultat du _parsing_ du fichier GeoJSON
-**-- TODO --**
+Voici une partie du résultat du _parsing_ du fichier _GeoJSON_.   
+
+![](img/parsing_result.jpg)
+
+Vous pouvez obtenir la version complète dans le fichier `resultat_parsing.txt` ou en exécutant la classe `Main`.
 ## Résultat sur Google Earth
 ![](img/google_earth_result.jpg)
 ## _Apprentissages ?_
