@@ -70,7 +70,9 @@ Voici une partie du résultat du _parsing_ du fichier _GeoJSON_.
 Vous pouvez obtenir la version complète dans le fichier `resultat_parsing.txt` ou en exécutant la classe `Main`.
 ## Résultat sur Google Earth
 ![](img/google_earth_result.jpg)
-## _Apprentissages ?_
-**-- TODO --**
+## Apprentissages
+Ce laboratoire nous à tout d'abord permis de mettre en pratique les connaissances acquises sur le parsing durant le cours de SER. Nous avons pu découvrir le format Geojson que nous ne connaissions pas avant de faire ce laboratoire. Nous avons ainsi pu traiter un fichier Geojson et écrire le résultat dans fichierer KML.
 ## Conclusions
-**-- TODO --**
+Nous avons apprécié le fait d'obtenir un fichier pouvant être importé directement dans Google Earth Pro et d'en voir le résultat immédiatement. Ceci rend ce laboratoire particulièrement intéressant.
+
+N'ayant pas rencontré de difficultés particulières, nous avons particulièrement apprécié ce laboratoire.
